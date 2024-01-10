@@ -11,6 +11,7 @@ export default function Todo() {
         setList(copyList)
         // console.log(copyList);
         setinput('');
+        // input ko empty karny ky liy input tag mein value lagani ho gi
     }
 
     function Updateinput(e){
@@ -23,6 +24,10 @@ export default function Todo() {
         let copyList = [...List]
         copyList.splice(e,1) 
         setList(copyList)
+    }
+    function Edit(e){
+        prompt('UPDATE VALUE',e)
+        
     }
 
     function DeleteAll(e){
@@ -41,6 +46,8 @@ export default function Todo() {
                         {v} 
                         <button onClick={()=> Delete(i)} >DELETE</button> 
                         {/* idhar 1 Arrow function create kia phir us mein return (Delete) funtion banaya hy  */}
+                        <button onClick={()=> Edit(v)} >EDIT</button> 
+
                         </li>
                 })
                 }
