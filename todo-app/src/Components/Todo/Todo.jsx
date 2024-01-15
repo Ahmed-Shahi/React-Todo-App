@@ -2,35 +2,37 @@ import React, { useState } from 'react'
 
 export default function Todo() {
 
-    let [List,setList] = useState([])
-    let [input,setinput] = useState('')
+    let [List, setList] = useState([])
+    let [input, setinput] = useState('')
 
-    function AddItems(){
+    function AddItems() {
         let copyList = [...List]
-        copyList.push(input) 
+        copyList.push(input)
         setList(copyList)
         // console.log(copyList);
         setinput('');
         // input ko empty karny ky liy input tag mein value lagani ho gi
     }
 
-    function Updateinput(e){
+    function Updateinput(e) {
         setinput(e.target.value)
         // console.log(e.target.value);
     }
 
-    function Delete(e){
+    function Delete(e) {
         // idhar addItem wala hi kam kary gein
         let copyList = [...List]
-        copyList.splice(e,1) 
+        copyList.splice(e, 1)
         setList(copyList)
     }
-    function Edit(e){
-        prompt('UPDATE VALUE',e)
-        
+    function Edit(i,e) {
+        const updateVal = prompt('UPDATE VALUE', e)
+        let copyList = [...List]
+        copyList.splice(i, 1, updateVal)
+        setList(copyList)
     }
 
-    function DeleteAll(e){
+    function DeleteAll(e) {
         setList([])
     }
     return (
@@ -41,15 +43,15 @@ export default function Todo() {
             <button onClick={DeleteAll} >DELETE ALL</button>
             <ul>
                 {
-                List.map((v,i)=>{
-                    return <li key={i}>
-                        {v} 
-                        <button onClick={()=> Delete(i)} >DELETE</button> 
-                        {/* idhar 1 Arrow function create kia phir us mein return (Delete) funtion banaya hy  */}
-                        <button onClick={()=> Edit(v)} >EDIT</button> 
+                    List.map((v, i) => {
+                        return <li key={i}>
+                            {v}
+                            <button onClick={() => Delete(i)} >DELETE</button>
+                            {/* idhar 1 Arrow function create kia phir us mein return (Delete) funtion banaya hy  */}
+                            <button onClick={() => Edit(i,v)} >EDIT</button>
 
                         </li>
-                })
+                    })
                 }
             </ul>
         </div>
